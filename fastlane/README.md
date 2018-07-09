@@ -21,9 +21,9 @@ or alternatively using `brew cask install fastlane`
 fastlane ios screenshots
 ```
 Generate new localized screenshots
-### ios build
+### ios fabric
 ```
-fastlane ios build
+fastlane ios fabric
 ```
 
 

@@ -16,12 +16,31 @@
 default_platform(:ios)
 
 platform :ios do
+
   desc "Generate new localized screenshots"
   lane :screenshots do
     capture_screenshots(scheme: "Jenkins")
   end
 
-lane :build do
-    build_app(scheme: "Jenkins")
+  lane :fabric do
+
+  increment_build_number
+  # build your iOS app
+  build_app(
+    scheme: "Jenkins",
+    export_method: "ad-hoc"
+  )
+
+  # upload to Beta by Crashlytics
+  crashlytics(
+    # keys for organization: MD's project
+    api_token: "b9a7e6ca6f9fe89bfbe301522d71cad50a61363a",
+    build_secret: "389781f4a4ea1c2f4a119fbd82c823e1cb28dd5cb8bc00b7a708ed15d61850b1",
+    groups: "Beta"
+  )
+
+  # slack(
+  #   slack_url: "https://hooks.slack.com/services/IDS"
+  # )
   end
 end
